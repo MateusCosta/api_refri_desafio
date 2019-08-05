@@ -21,3 +21,6 @@ Route::resource('produtos', 'ProdutoController');
 
 Route::post('produtos/verify', 'ProdutoController@verify');
 
+Route::post('produtos/bulkDestroy', 'ProdutoController@bulkDestroy');
+
+

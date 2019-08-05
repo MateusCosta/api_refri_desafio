@@ -28,7 +28,7 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        //not implemented
     }
 
     /**
@@ -39,9 +39,18 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $produto = new Produto();
+        $produto->marca = $request->input('marca');
+        $produto->tipo = $request->input('tipo');
+        $produto->sabor = $request->input('sabor');
+        $produto->unidade = $request->input('unidade');
+        $produto->quantidade = $request->input('quantidade');
+        $produto->preco = $request->input('preco');
+        if($produto->save()){
+            return new ProdutoResource($produto);
+        }
     }
-
+   
     /**
      * Display the specified resource.
      *
@@ -62,7 +71,7 @@ class ProdutoController extends Controller
      */
     public function edit($id)
     {
-        //
+        //not implemented
     }
 
     /**
@@ -74,29 +83,64 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $produto = Produto::findOrFail($id);
+        $produto->marca = $request->input('marca');
+        $produto->tipo = $request->input('tipo');
+        $produto->sabor = $request->input('sabor');
+        $produto->unidade = $request->input('unidade');
+        $produto->quantidade = $request->input('quantidade');
+        $produto->preco = $request->input('preco');
+        if($produto->save()){
+            return new ProdutoResource($produto);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $produto = Produto::findOrFail($id);
+
+        if($produto->delete()){
+            return new ProdutoResource($produto);
+        }
+        
+    }
+    /**
+     * Remove an array of resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function bulkDestroy(Request $request)
+    {
+        $produto_id_array = $request->input('id');
+        $produtos = Produto::whereIn('id',$produto_id_array);
+        if($produtos->delete()){
+            return new ProdutoResource($produtos);
+        }
+       
+        
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Display the specified resource with this fields.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function verify(Request $request){
       
-        $produto = Produto::where([['marca', $request->input('marca')],['sabor', $request->input('sabor')],['unidade', $request->input('unidade')],['tipo', $request->input('tipo')]])->get();
+        $produto = Produto::where([
+            ['marca', $request->input('marca')],
+            ['sabor', $request->input('sabor')],
+            ['unidade', $request->input('unidade')],
+            ['tipo', $request->input('tipo')]
+            ])->get();
 
         return ProdutoResource::collection($produto);
         
