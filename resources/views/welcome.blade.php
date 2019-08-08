@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
         <!-- Styles -->
         <style>
@@ -49,11 +50,11 @@
             }
 
             .links > a {
-                color: #636b6f;
-                padding: 0 25px;
+               
+                padding: 10px 25px;
                 font-size: 13px;
                 font-weight: 600;
-                letter-spacing: .1rem;
+                /* letter-spacing: .1rem; */
                 text-decoration: none;
                 text-transform: uppercase;
             }
@@ -61,9 +62,24 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .btn-outline-awesome {
+                color: #ff33d7;
+                background-color: transparent;
+                background-image: none;
+                border-color: #ff33d7;
+            }
+
+            .btn-outline-awesome:hover {
+                color: white;
+                background-color: #ff33d7;
+                background-image: none;
+                border-color: white;
+            }
         </style>
     </head>
     <body>
+
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -81,17 +97,19 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Estoque API
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                        <div class="btn-group-lg" role="group" aria-label="Exemplo básico">
+                    <a class="btn btn-outline-primary" href="api/produtos">Produtos</a>
+                    <a  class="btn btn-outline-success" href="api/marcas">Marcas</a>
+                    <a  class="btn btn-outline-danger" href="api/sabores">Sabores</a>
+                    <a  class="btn btn-outline-warning" href="api/depositos">Depositos</a>
+                    <a  class="btn btn-outline-info" href="api/estoque">Estoque</a>
+                    <a  class="btn btn-outline-secondary" href="api/transacoes">Transacoes</a>
+                    <a  class="btn btn-outline-awesome" href="api/healthcheck">HealthCheck</a>
+                        </div>
                 </div>
             </div>
         </div>

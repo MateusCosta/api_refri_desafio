@@ -23,4 +23,6 @@ Route::post('produtos/verify', 'ProdutoController@verify');
 
 Route::post('produtos/bulkDestroy', 'ProdutoController@bulkDestroy');
 
-
+Route::get('/healthcheck',function(){
+    return 'It works!';
+});
