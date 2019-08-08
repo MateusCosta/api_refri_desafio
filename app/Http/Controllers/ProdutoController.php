@@ -119,10 +119,15 @@ class ProdutoController extends Controller
     public function bulkDestroy(Request $request)
     {
         $produto_id_array = $request->input('id');
-        $produtos = Produto::whereIn('id',$produto_id_array);
-        if($produtos->delete()){
-            return new ProdutoResource($produtos);
+        $produtos = Produto::whereIn('id', $produto_id_array)->get();
+        if(!count($produtos)){
+            abort(404);
         }
+        $produtos->each(function ($produto, $key) {
+            $produto->delete();
+        });
+       
+            return $produtos;
        
         
     }
