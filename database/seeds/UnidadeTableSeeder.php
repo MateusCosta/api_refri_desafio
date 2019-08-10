@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ProdutosTableSeeder extends Seeder
+class UnidadeTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,16 +11,14 @@ class ProdutosTableSeeder extends Seeder
      */
     public function run()
     {
-        //factory(App\Produto::class,100)->create();
+        $unidades = factory(App\Unidade::class, 2)->make();
 
-        $produtos = factory(App\Produto::class, 9)->make();
-
-        foreach ($produtos as $produto) {
+        foreach ($unidades as $unidade) {
             repeat:
             try {
-                $produto->save();
+                $unidade->save();
             } catch (\Illuminate\Database\QueryException $e) {
-                $produto = factory(App\Produto::class)->make();
+                $unidade = factory(App\Unidade::class)->make();
                 goto repeat;
             }
         }

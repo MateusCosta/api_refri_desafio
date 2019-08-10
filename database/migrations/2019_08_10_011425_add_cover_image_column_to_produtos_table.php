@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUnidadesTable extends Migration
+class AddCoverImageColumnToProdutosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateUnidadesTable extends Migration
      */
     public function up()
     {
-        Schema::create('unidades', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('unidade')->unique();
-            $table->timestamps();
+        Schema::table('produtos', function (Blueprint $table) {
+            $table->string('cover_image');
         });
     }
 
@@ -27,6 +25,8 @@ class CreateUnidadesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('unidades');
+        Schema::table('produtos', function (Blueprint $table) {
+            $table->dropColumn('cover_image');
+        });
     }
 }

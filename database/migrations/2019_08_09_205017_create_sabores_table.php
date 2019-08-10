@@ -15,7 +15,7 @@ class CreateSaboresTable extends Migration
     {
         Schema::create('sabores', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('sabor',30);
+            $table->string('nome',30)->unique();
             $table->timestamps();
         });
     }

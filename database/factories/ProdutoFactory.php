@@ -2,23 +2,25 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Produto;
 use Faker\Generator as Faker;
 
-$factory->define(App\Produto::class, function (Faker $faker) {
-    $Marcas = ['Fanta', 'Coca-Cola', 'São Gerardo', 'Kuat','Sukita', 'Guaraná Antártica', 'Pepsi','Sprite','Dolly'];
-    $Sabores = ['Cola', 'Guaraná', 'Cajú','Laranja','Uva','Limão','Café','Lima','Baunilha'];
-    $Unidades = ['mL', 'L'];
-    $Tipos = ['PET', 'Lata', 'Garrafa'];
-    $min = 0.1;
-    $max = 10;
+
+
+
+
+$factory->define(Produto::class, function (Faker $faker) {
+ 
     return [
-        'marca' => $faker->randomElement($Marcas ),
-        'tipo' => $faker->randomElement($Tipos),
-        'sabor' => $faker->randomElement($Sabores),
-        'unidade' => $faker->randomElement($Unidades ),
-        'preco' => $faker->numberBetween($min = 0.1, $max = 10),
-        'quantidade' => $faker->numberBetween($min = 1, $max = 100)
+        'marca_id' => $faker->numberBetween($min = 1, $max = 1),
+        'tipo_id' => $faker->numberBetween($min = 1, $max = 3),
+        'sabor_id' => $faker->numberBetween($min = 1, $max =1),
+        'unidade_id' => $faker->numberBetween($min = 1, $max = 2),
+        'user_id' => $faker->numberBetween($min = 1, $max = 10),
+        'cover_image' => $faker->imageUrl($width = 640, $height = 480),
+        'preco' => $faker->randomFloat($nbMaxDecimals = NULL, $min = 1, $max = 10),
+        'quantidade' => $faker->numberBetween($min = 1, $max = 100),
+        'ativo' => $faker->boolean()
         
     ];
 });
