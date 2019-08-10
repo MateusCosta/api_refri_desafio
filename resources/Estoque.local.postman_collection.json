@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "8d462767-7f65-4777-ac20-31519909022f",
+		"name": "Estoque.local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Verify",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\r\n\"marca\": \"São Gerardo\",\r\n            \"tipo\": \"LATA\",\r\n            \"sabor\": \"Caju\",\r\n            \"unidade\": \"mL\",\r\n            \"preco\": \"5.000\",\r\n            \"quantidade\": 19,\r\n            \"created_at\": \"2019-08-05 03:06:38\",\r\n            \"updated_at\": \"2019-08-05 03:06:38\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost/api/produtos/verify",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"produtos",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/produtos/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"produtos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/produtos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"produtos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/produtos/135",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"produtos",
+						"135"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bulk Delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\": [19,20,21,22]}"
+				},
+				"url": {
+					"raw": "http://localhost/api/produtos/bulkDestroy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"produtos",
+						"bulkDestroy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n         \r\n            \"marca\": \"São Gerardo\",\r\n            \"tipo\": \"LATA\",\r\n            \"sabor\": \"Caju\",\r\n            \"unidade\": \"mL\",\r\n            \"preco\": \"5.000\",\r\n            \"quantidade\": 99\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost/api/produtos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"produtos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n         \r\n           \"id\": 23,\r\n            \"marca\": \"São Geraldo\",\r\n            \"tipo\": \"PET\",\r\n            \"sabor\": \"Café\",\r\n            \"unidade\": \"L\",\r\n            \"preco\": \"7.000\",\r\n            \"quantidade\": 50,\r\n            \"created_at\": \"2019-08-08 07:58:42\",\r\n            \"updated_at\": \"2019-08-08 07:58:42\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost/api/produtos/23",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"produtos",
+						"23"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
