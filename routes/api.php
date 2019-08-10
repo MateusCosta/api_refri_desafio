@@ -18,6 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('produtos', 'ProdutoController');
+Route::resource('marcas', 'MarcaController');
+Route::resource('sabores', 'SaborController');
+Route::resource('unidades', 'UnidadeController');
+Route::resource('tipos', 'TipoController');
+
 
 Route::post('produtos/verify', 'ProdutoController@verify');
 

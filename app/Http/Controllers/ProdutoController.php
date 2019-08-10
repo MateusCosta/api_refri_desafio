@@ -16,9 +16,16 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produto = Produto::paginate(10);
+        $produtos = Produto::where('ativo', 1)->get();
+        foreach ($produtos as $produto){
 
-        return ProdutoResource::collection($produto);
+            $produto->marca = $produto->marca->marca;
+            $produto->marca = $produto->sabor->sabor;
+            $produto->marca = $produto->unidade->unidade;
+            $produto->marca = $produto->tipo->tipo;
+        
+        }
+        return ProdutoResource::collection($produtos);
     }
 
     /**
@@ -39,13 +46,45 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
+        //validacao
+        $this->validate($request,[
+            'marca_id' => 'required',
+            'tipo_id' => 'required',
+            'sabor_id' => 'required',
+            'user_id' => 'required',
+            'unidade_id' => 'required',
+            'quantidade' => 'required',
+            'preco' => 'required',
+            'cover_image' => 'image|nullable|max:1999'
+        ]);
+
+        if($request->hasFile('cover_image')){
+
+            $fileNameWithExt = $request->file('cover_image')->getClientOriginalName();
+
+            $fileName = pathinfo($fileNameWithExt,PATHINFO_FILENAME);
+
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+
+            $path = $request->file('cover_image')->storeAs('public/cover_images',$fileNameToStore);
+
+        }else{
+            $fileNameToStore = 'noimage.jpg';
+        }
+        
+
         $produto = new Produto();
-        $produto->marca = $request->input('marca');
-        $produto->tipo = $request->input('tipo');
-        $produto->sabor = $request->input('sabor');
-        $produto->unidade = $request->input('unidade');
+        $produto->marca_id = $request->input('marca_id');
+        $produto->tipo_id = $request->input('tipo_id');
+        $produto->sabor_id = $request->input('sabor_id');
+        $produto->user_id = $request->input('user_id');
+        $produto->unidade_id = $request->input('unidade_id');
+        $produto->user_id = $request->input('user_id');
         $produto->quantidade = $request->input('quantidade');
         $produto->preco = $request->input('preco');
+        $produto->cover_image = $fileNameToStore;
         if($produto->save()){
             return new ProdutoResource($produto);
         }
@@ -83,13 +122,49 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //validacao
+        $this->validate($request,[
+            'marca_id' => 'required',
+            'tipo_id' => 'required',
+            'sabor_id' => 'required',
+            'user_id' => 'required',
+            'unidade_id' => 'required',
+            'quantidade' => 'required',
+            'preco' => 'required',
+            'cover_image' => 'image|nullable|max:1999'
+        ]);
+
+        if($request->hasFile('cover_image')){
+
+            $fileNameWithExt = $request->file('cover_image')->getClientOriginalName();
+
+            $fileName = pathinfo($fileNameWithExt,PATHINFO_FILENAME);
+
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+
+            $path = $request->file('cover_image')->storeAs('public/cover_images',$fileNameToStore);
+
+        }else{
+            $fileNameToStore = 'noimage.jpg';
+        }
+        
+
         $produto = Produto::findOrFail($id);
-        $produto->marca = $request->input('marca');
-        $produto->tipo = $request->input('tipo');
-        $produto->sabor = $request->input('sabor');
-        $produto->unidade = $request->input('unidade');
+
+        $produto->marca_id = $request->input('marca_id');
+        $produto->tipo_id = $request->input('tipo_id');
+        $produto->sabor_id = $request->input('sabor_id');
+        $produto->user_id = $request->input('user_id');
+        $produto->unidade_id = $request->input('unidade_id');
+        $produto->user_id = $request->input('user_id');
         $produto->quantidade = $request->input('quantidade');
         $produto->preco = $request->input('preco');
+        
+        if($request->hasFile('cover_image')){
+        $produto->cover_image = $fileNameToStore;
+        }
         if($produto->save()){
             return new ProdutoResource($produto);
         }
@@ -141,10 +216,10 @@ class ProdutoController extends Controller
     public function verify(Request $request){
       
         $produto = Produto::where([
-            ['marca', $request->input('marca')],
-            ['sabor', $request->input('sabor')],
-            ['unidade', $request->input('unidade')],
-            ['tipo', $request->input('tipo')]
+            ['marca_id', $request->input('marca_id')],
+            ['sabor_id', $request->input('sabor_id')],
+            ['unidade_id', $request->input('unidade_id')],
+            ['tipo_id', $request->input('tipo_id')]
             ])->get();
 
         return ProdutoResource::collection($produto);
